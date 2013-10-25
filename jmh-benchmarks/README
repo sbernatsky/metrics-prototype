@@ -1,0 +1,8 @@
+You need JMH to build and run this test:
+    http://openjdk.java.net/projects/code-tools/jmh/
+
+Building:
+    $ mvn clean install
+
+Running:
+    $ java -jar target/microbenchmarks.jar ".*" -wi 1 -r 1 -i 5

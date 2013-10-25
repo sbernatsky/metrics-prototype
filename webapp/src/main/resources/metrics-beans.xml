@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+<!--
+    <context:spring-configured/>
+    <context:annotation-config/>
+
+    <bean class="com.ebuddy.config.spring.ConfigurationManagerPropertyPlaceholderConfigurer">
+        <property name="ignoreResourceNotFound" value="true"/>
+        <property name="locations">
+            <list>
+                <value>classpath:quartz.properties</value>
+            </list>
+        </property>
+        <property name="configurationManager" ref="configurationManager"/>
+        <property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE"/>
+    </bean>
+
+    <bean id="configurationManager" class="com.ebuddy.config.ConfigurationManagerImpl"
+          init-method="init" destroy-method="destroy">
+        <constructor-arg index="0" value="/var/www/ebuddy-bot-broadcast-tool/bot-broadcast-tool.properties"/>
+        <constructor-arg index="1" value="false"/>
+        <constructor-arg index="2" value="bot-broadcast-tool"/>
+    </bean>
+
+    <bean id="httpClient" class="org.apache.http.impl.client.DefaultHttpClient">
+        <constructor-arg index="0">
+            <bean class="org.apache.http.impl.conn.PoolingClientConnectionManager" destroy-method="shutdown">
+                <property name="defaultMaxPerRoute" value="2"/>
+                <property name="maxTotal" value="16"/>
+                <constructor-arg index="0">
+                    <bean class="org.apache.http.conn.scheme.SchemeRegistry">
+                        <property name="items">
+                            <util:map key-type="java.lang.String" value-type="org.apache.http.conn.scheme.Scheme">
+                                <entry key="http">
+                                    <bean class="org.apache.http.conn.scheme.Scheme">
+                                        <constructor-arg index="0" value="http"/>
+                                        <constructor-arg index="1" value="80"/>
+                                        <constructor-arg index="2">
+                                            <bean class="org.apache.http.conn.scheme.PlainSocketFactory"
+                                                  factory-method="getSocketFactory"/>
+                                        </constructor-arg>
+                                    </bean>
+                                </entry>
+                                <entry key="https">
+                                    <bean class="org.apache.http.conn.scheme.Scheme">
+                                        <constructor-arg index="0" value="http"/>
+                                        <constructor-arg index="1" value="443"/>
+                                        <constructor-arg index="2">
+                                            <bean class="org.apache.http.conn.ssl.SSLSocketFactory"
+                                                  factory-method="getSocketFactory"/>
+                                        </constructor-arg>
+                                    </bean>
+                                </entry>
+                            </util:map>
+                        </property>
+                    </bean>
+                </constructor-arg>
+            </bean>
+        </constructor-arg>
+    </bean>
+
+    <bean id="hSQLSchemaLoader" class="com.ebuddy.broadcasttool.service.db.HSQLDatabaseCreator">
+        <constructor-arg index="0" ref="configurationManager"/>
+        <constructor-arg index="1" value="${org.quartz.dataSource.quartzDataSource.URL}"/>
+        <constructor-arg index="2" value="${org.quartz.dataSource.quartzDataSource.user}"/>
+        <constructor-arg index="3" value="${org.quartz.dataSource.quartzDataSource.password}"/>
+    </bean>
+
+    <bean id="create_schema" class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="targetObject"><ref local="configurationManager"/></property>
+        <property name="targetMethod"><value>getProperty</value></property>
+        <property name="arguments">
+            <list>
+                <value>create_schema</value>
+                <value>false</value>
+            </list>
+        </property>
+    </bean>
+
+
+    <bean id="quartzDataSource" class="org.apache.commons.dbcp.BasicDataSource" depends-on="create_schema" destroy-method="close">
+        <property name="driverClassName" value="org.hsqldb.jdbcDriver" />
+        <property name="url" value="${org.quartz.dataSource.quartzDataSource.URL}"/>
+        <property name="username" value="${org.quartz.dataSource.quartzDataSource.user}"/>
+        <property name="password" value="${org.quartz.dataSource.quartzDataSource.password}" />
+        <property name="initialSize" value="3" />
+        <property name="maxActive" value="6" />
+        <property name="poolPreparedStatements" value="true" />
+        <property name="maxOpenPreparedStatements" value="6" />
+    </bean>
+
+    <bean id="quartzSchemaLoader" class="com.ebuddy.broadcasttool.service.db.QuartzSchemaLoader">
+        <constructor-arg index="0" ref="quartzDataSource"/>
+        <constructor-arg index="1" value="classpath:tables_hsqldb.sql"/>
+    </bean>
+
+    <bean id="broadcastService" class="com.ebuddy.broadcasttool.service.BroadcastService" destroy-method="destroy"
+          depends-on="quartzSchemaLoader" >
+        <constructor-arg index="0" ref="broadcastConfiguration"/>
+    </bean>
+
+    <bean id="broadcastScheduler" class="com.ebuddy.broadcasttool.service.BroadCastSchedulerFactoryBean"/>
+
+    <bean id="mediaClient" class="com.ebuddy.broadcasttool.service.MediaClientImpl"/>
+
+    <bean id="broadcastConfiguration"  class="com.ebuddy.broadcasttool.service.BroadcastConfiguration"/>
+  -->
+</beans>
